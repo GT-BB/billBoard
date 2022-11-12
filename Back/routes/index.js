@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-const alertBox = function (req, res, next) {
+/*const alertBox = function (req, res, next) {
   alert("You have successfully submitted your data!");
   next()
 }
 
-router.use(alertBox)
+router.use(alertBox) */
 
 router.post('/', function(req, res, next) {
   var data = req.body;
@@ -24,6 +24,7 @@ router.post('/', function(req, res, next) {
   db.run('INSERT INTO entries VALUES (NULL, ?, datetime("now", "localtime"), ?, ?, ?, ?)', [Procedure, Cost, State, Gender, Age]);
 
   db.close();
+  bread = fetch("http://127.0.0.1:8000/api/users") // Might remove if doesn't work
   res.redirect("http://127.0.0.1:5501/Front/website/html/post.html")
   
 });
