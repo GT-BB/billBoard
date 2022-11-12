@@ -2,6 +2,7 @@
 var express = require("express")
 var app = express()
 var db = require("./database.js")
+var fs = require('fs')
 
 // Server port
 var HTTP_PORT = 8000 
@@ -22,10 +23,19 @@ app.get("/api/users", (req, res, next) => {
           res.status(400).json({"error":err.message});
           return;
         }
+
         res.json({
             "message":"success",
             "data":rows
         })
+
+        dict = {"data": rows}
+        console.log(dict)
+        var dictstring = JSON.stringify(dict)
+        fs.writeFile("../Front/jsonFiles/set1.json", dictstring, function(err, result) {
+            if(err) console.log('error', err);
+        });
+
       });
 });
 
