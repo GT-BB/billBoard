@@ -15,7 +15,7 @@ app.get("/", (req, res, next) => {
 });
 
 app.get("/api/users", (req, res, next) => {
-    var sql = "select * from entries limit 1000;"
+    var sql = "SELECT * FROM procedures INNER JOIN entries ON procedures.proc_id = entries.proc_id;"
     var params = []
     db.all(sql, params, (err, rows) => {
         if (err) {
@@ -35,3 +35,9 @@ app.get("/api/users", (req, res, next) => {
 app.use(function(req, res){
     res.status(404);
 });
+
+// SELECT * FROM entries Old code to select data
+/*"ALTER TABLE procedures"
+"CREATE TABLE procedures"
+"CREATE TABLE procedures_short (proc_id INTEGER PRIMARY KEY, name TEXT NOT NULL);"
+"INSERT INTO procedures_short ("*/
