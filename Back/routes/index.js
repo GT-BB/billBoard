@@ -4,20 +4,23 @@ var fs = require('fs')
 
 router.post('/', function(req, res, next) {
   var data = req.body;
-  var Procedure = Number(data.Procedure);
+  var Procedure = data.procedurenum;
   var Cost = Number(data.Cost);
   var State = data.State;
   var Gender = data.Gender;
   var Age = Number(data.Age);
+  console.log(data)
+  console.log(State)
+  console.log(Gender)
 
   var output = [Procedure, Cost, State, Gender, Age]
 
   const sqlite3 = require('sqlite3').verbose();
   let db = new sqlite3.Database("data.db");
 
-  console.log(db.run('INSERT INTO entries VALUES (NULL, ?, datetime("now", "localtime"), ?, ?, ?, ?)', [Procedure, Cost, State, Gender, Age]));
+  db.run('INSERT INTO entries(proc_id, datetime, price, age, gender, state) VALUES (?, datetime("now", "localtime"), ?, ?, ?, ?)', [Procedure, Cost, Age, Gender, State]);
 
-  var sql = "SELECT * FROM procedures INNER JOIN entries ON procedures.proc_id = entries.proc_id;"
+  var sql = "SELECT procedures.proc_id, procedures.name, entries.datetime, entries.price, entries.age, entries.gender, entries.state FROM procedures INNER JOIN entries ON procedures.proc_id = entries.proc_id;"
   var params = []
   console.log("reached here")
 
