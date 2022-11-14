@@ -30,6 +30,7 @@ searchState.addEventListener('keyup', (e) => {
     displayCharacters(filteredCharacters);
 });
 
+//general search function
 const loadCharacters = async () => {
     try {
         const res = await fetch('search.json');
