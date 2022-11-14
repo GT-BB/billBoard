@@ -1,13 +1,29 @@
 const charactersList = document.getElementById('charactersList');
 const searchBar = document.getElementById('searchBar');
+const searchState = document.getElementById('searchState');
+
 let hpCharacters = [];
 
+//search procedures
 searchBar.addEventListener('keyup', (e) => {
     const searchString = e.target.value.toLowerCase();
 
     const filteredCharacters = hpCharacters.filter((character) => {
         return (
-            character.name.toLowerCase().includes(searchString) ||
+            character.name.toLowerCase().includes(searchString) 
+            // || character.state.toLowerCase().includes(searchString)
+        );
+    });
+    displayCharacters(filteredCharacters);
+});
+
+//serach states
+searchState.addEventListener('keyup', (e) => {
+    const searchString = e.target.value.toLowerCase();
+
+    const filteredCharacters = hpCharacters.filter((character) => {
+        return (
+            // character.name.toLowerCase().includes(searchString) ||
             character.state.toLowerCase().includes(searchString)
         );
     });
