@@ -4,31 +4,47 @@ const searchState = document.getElementById('searchState');
 
 let hpCharacters = [];
 
-//search procedures
+//search everything - lowkey does not
 searchBar.addEventListener('keyup', (e) => {
     const searchString = e.target.value.toLowerCase();
+    
+    searchState.addEventListener('keyup', (e) => {
+        const searchString2 = e.target.value.toLowerCase();
 
-    const filteredCharacters = hpCharacters.filter((character) => {
-        return (
-            character.name.toLowerCase().includes(searchString) 
-            // || character.state.toLowerCase().includes(searchString)
-        );
+        const filteredCharacters = hpCharacters.filter((character) => {
+            return (
+                character.name.toLowerCase().includes(searchString) && character.state.toLowerCase().includes(searchString2)
+            );
+        });
+        displayCharacters(filteredCharacters);
     });
-    displayCharacters(filteredCharacters);
 });
 
-//serach states
-searchState.addEventListener('keyup', (e) => {
-    const searchString = e.target.value.toLowerCase();
+// //search procedures
+// searchBar.addEventListener('keyup', (e) => {
+//     const searchString = e.target.value.toLowerCase();
 
-    const filteredCharacters = hpCharacters.filter((character) => {
-        return (
-            // character.name.toLowerCase().includes(searchString) ||
-            character.state.toLowerCase().includes(searchString)
-        );
-    });
-    displayCharacters(filteredCharacters);
-});
+//     const filteredCharacters = hpCharacters.filter((character) => {
+//         return (
+//             character.name.toLowerCase().includes(searchString) 
+//             // || character.state.toLowerCase().includes(searchString)
+//         );
+//     });
+//     displayCharacters(filteredCharacters);
+// });
+
+// //serach states
+// searchState.addEventListener('keyup', (e) => {
+//     const searchString = e.target.value.toLowerCase();
+
+//     const filteredCharacters = hpCharacters.filter((character) => {
+//         return (
+//             // character.name.toLowerCase().includes(searchString) ||
+//             character.state.toLowerCase().includes(searchString)
+//         );
+//     });
+//     displayCharacters(filteredCharacters);
+// });
 
 //general search function
 const loadCharacters = async () => {
